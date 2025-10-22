@@ -153,41 +153,19 @@ recruitment_ai_agent/
     cd Recruitment_AI_Agent
     ```
 
-2.  **Set up the virtual environment:**
-    ```bash
-    # Using pip (choose one method)
-    python -m venv .venv
-    
-    # OR using uv (faster alternative)
-    uv venv
-    ```
+2.  **Set up and activate the virtual environment:**  # any environment conda or venv
 
-3.  **Activate the virtual environment:**
-    ```bash
-    # Windows
-    .venv\Scripts\activate
-    
-    # Linux/MacOS
-    # source .venv/bin/activate
-    ```
+# create conda env
+conda create -n recruitment_env python=3.11 -y
+
+# activate conda activate 
+conda activate recruitment_env
+
 
 4.  **Install dependencies:**
     ```bash
     # Using pip (if you used python -m venv)
     pip install -r requirements.txt
-    
-    # OR using uv (if you used uv venv)
-    uv pip install -r requirements.txt
-    ```
-    
-    If `requirements.txt` doesn't exist, generate it first:
-    ```bash
-    # Install pipreqs if needed
-    pip install pipreqs  # or: uv pip install pipreqs
-    
-    # Generate requirements.txt
-    pipreqs . --force --ignore .venv,data,static,templates
-    ```
 
 5.  **Configure the application:**
 
