@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "recruitment-ai-agent"
+version = "0.1.0"
+description = "A recruitment AI agent that ranks candidates based on their resumes and a job description."
+authors = ["Jayshree Karavadra <jayshreekaravadra09@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = {extras = ["all"], version = "^0.119.0"}
+uvicorn = "^0.38.0"
+jinja2 = "^3.1.6"
+pyyaml = "^6.0.3"
+python-dotenv = "^1.1.1"
+markitdown = {extras = ["all"], version = "^0.1.3"}
+openai = "^2.5.0"
+groq = "^0.32.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

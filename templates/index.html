@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruitment AI Agent</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Recruitment AI Agent</h1>
+
+        <form id="evaluation-form" action="/evaluate" method="post" enctype="multipart/form-data">
+            <div class="tabs">
+                <button type="button" class="tab-link active" onclick="openTab(event, 'upload-jd')">Upload JD</button>
+                <button type="button" class="tab-link" onclick="openTab(event, 'text-jd')">Manual JD</button>
+                <button type="button" class="tab-link" onclick="openTab(event, 'generate-jd')">Generate JD</button>
+            </div>
+
+            <div id="upload-jd" class="tab-content active form-section">
+                <h3>Upload Job Description</h3>
+                <input type="file" name="jd_file">
+            </div>
+
+            <div id="text-jd" class="tab-content form-section">
+                <h3>Paste Job Description</h3>
+                <textarea name="jd_text" placeholder="Paste the job description here..."></textarea>
+            </div>
+
+            <div id="generate-jd" class="tab-content form-section">
+                <h3>Generate Job Description</h3>
+                <div class="form-grid">
+                    <input type="text" name="job_title" placeholder="Job Title">
+                    <input type="text" name="experience" placeholder="Years of Experience">
+                    <input type="text" name="skills" placeholder="Must-have Skills (comma-separated)">
+                    <input type="text" name="company_name" placeholder="Company Name">
+                    <input type="text" name="employment_type" placeholder="Employment Type">
+                    <input type="text" name="industry" placeholder="Industry">
+                    <input type="text" name="location" placeholder="Location">
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Upload Resumes (up to 10)</h3>
+                <input type="file" name="resume_files" multiple required>
+            </div>
+
+            <button type="submit" class="submit-button">Evaluate Candidates</button>
+        </form>
+
+        <div id="loader" class="loader-container">
+            <div class="loader"></div>
+            <p>Evaluating candidates, please wait...</p>
+        </div>
+
+        <div id="results-wrapper">
+            {% if results %}
+            <div class="results-section">
+                <h2>Evaluation Results</h2>
+                <div class="results-container">
+                    {% for candidate in results %}
+                    <div class="candidate-card {% if loop.first %}top-candidate{% endif %}">
+                        <h3>{{ candidate.filename }}</h3>
+                        {% if candidate.error %}
+                            <p class="error"><strong>Error:</strong> {{ candidate.error }}</p>
+                        {% else %}
+                            <p><strong>Score:</strong> <span class="score">{{ candidate.score }}</span></p>
+                            <p><strong>Missing Skills:</strong></p>
+                            <ul>
+                                {% for skill in candidate.missing_skills %}
+                                <li>{{ skill }}</li>
+                                {% endfor %}
+                            </ul>
+                            <p><strong>Remarks:</strong> {{ candidate.remarks }}</p>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            {% if interview_email or rejection_email %}
+            <div class="email-section">
+                <h2>Generated Emails</h2>
+                <div class="results-container">
+                    {% if interview_email %}
+                    <div class="email-card">
+                        <h3>Interview Invitation for {{ results[0].filename }}</h3>
+                        <pre>{{ interview_email }}</pre>
+                    </div>
+                    {% endif %}
+                    {% if rejection_email %}
+                    <div class="email-card">
+                        <h3>Rejection Email (Template)</h3>
+                        <pre>{{ rejection_email }}</pre>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="/static/main.js"></script>
+</body>
+</html>

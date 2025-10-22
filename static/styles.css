@@ -1,0 +1,238 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #4A90E2;
+    --primary-hover: #357ABD;
+    --background-color: #F7F9FC;
+    --card-background: #FFFFFF;
+    --text-color: #333D47;
+    --subtle-text-color: #5A6872;
+    --border-color: #E0E6ED;
+    --shadow-color: rgba(0, 0, 0, 0.05);
+    --success-color: #27AE60;
+    --error-color: #E74C3C;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 2em;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 2.5em;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1em;
+    color: var(--text-color);
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 2em;
+}
+
+.tab-link {
+    background: none;
+    border: none;
+    padding: 1em 1.5em;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    color: var(--subtle-text-color);
+    position: relative;
+    transition: color 0.3s;
+}
+
+.tab-link:hover {
+    color: var(--primary-color);
+}
+
+.tab-link.active {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.tab-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-color);
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.5s;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Form */
+form {
+    background: var(--card-background);
+    padding: 2.5em;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px var(--shadow-color);
+    margin-bottom: 3em;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5em;
+}
+
+.form-section h3 {
+    margin-top: 0;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.form-section input, .form-section textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 1em;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-section input:focus, .form-section textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+.form-section textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.submit-button {
+    background-color: var(--primary-color);
+    color: white;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 1.5em;
+}
+
+.submit-button:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+/* Results */
+.results-section, .email-section {
+    margin-top: 3em;
+}
+
+.results-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2em;
+}
+
+.candidate-card, .email-card {
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    padding: 2em;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px var(--shadow-color);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.candidate-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+
+.top-candidate {
+    border-left: 5px solid var(--success-color);
+}
+
+.candidate-card h3, .email-card h3 {
+    margin-top: 0;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.candidate-card p {
+    margin: 0.5em 0;
+}
+
+.candidate-card ul {
+    padding-left: 1.2em;
+    margin: 0.5em 0;
+}
+
+.score {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.error {
+    color: var(--error-color);
+    font-weight: 500;
+}
+
+.email-card pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background: #F7F9FC;
+    padding: 1em;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+/* Loader */
+.loader-container {
+    display: none;
+    text-align: center;
+    padding: 2em;
+}
+
+.loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1em;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

@@ -1,0 +1,51 @@
+resume_evaluation:
+  system_prompt: |
+    You are a highly experienced AI Recruitment Assistant. Your purpose is to conduct a detailed, unbiased analysis of a candidate's resume against a provided job description. You must return your analysis in a structured JSON format and nothing else. Adhere strictly to the JSON schema provided in the user prompt.
+  user_prompt: |
+    Job Description:
+    ---
+    {jd_text}
+    ---
+    Candidate Resume:
+    ---
+    {resume_text}
+    ---
+    **Instruction:**
+    Analyze the resume against the job description and return a JSON object that follows the schema below. 
+
+    **JSON Schema:**
+    ```json
+    {{
+      "score": "<integer, 0-100>",
+      "missing_skills": "<array of strings>",
+      "remarks": "<string, 30-word summary>"
+    }}
+    ```
+
+    **Scoring Guidelines:**
+    - **90-100:** Excellent match. The candidate meets all or nearly all key requirements.
+    - **70-89:** Good match. The candidate meets most of the key requirements.
+    - **50-69:** Fair match. The candidate meets some of the key requirements, but has significant gaps.
+    - **<50:** Poor match. The candidate does not meet the key requirements.
+
+    **Missing Skills:**
+    - Identify key skills or qualifications from the job description that are not present in the resume.
+
+    **Remarks:**
+    - Provide a brief, objective summary of the candidate's suitability for the role (approx. 30 words).
+
+jd_generation:
+  system_prompt: "You are an expert AI Recruitment Assistant. Your task is to generate a job description based on the provided requirements."
+  user_prompt: |
+    Generate a job description with the following requirements:
+    {requirements}
+
+interview_email:
+  system_prompt: "You are an expert AI Recruitment Assistant. Your task is to generate a professional interview invitation email."
+  user_prompt: |
+    Generate an interview invitation email for the candidate {candidate_name} for the role of {role}.
+
+rejection_email:
+  system_prompt: "You are an expert AI Recruitment Assistant. Your task is to generate a professional rejection email."
+  user_prompt: |
+    Generate a rejection email for the candidate {candidate_name} for the role of {role}.

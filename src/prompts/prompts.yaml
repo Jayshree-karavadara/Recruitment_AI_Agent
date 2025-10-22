@@ -1,0 +1,79 @@
+# Resume Evaluation Prompt
+resume_evaluation:
+  system_prompt: |
+    You are an expert recruiter with deep knowledge of technical hiring. 
+    Your task is to evaluate a candidate's resume against a job description.
+    Provide a detailed analysis including strengths, weaknesses, and a score out of 100.
+  user_prompt: |
+    Job Description:
+    {jd_text}
+
+    Candidate's Resume:
+    {resume_text}
+
+    Please evaluate this candidate based on the job description above. 
+    Consider their skills, experience, and qualifications.
+    
+    Format your response as a JSON object with these keys:
+    - score (number): Overall match score (0-100)
+    - strengths (list): Key strengths that match the job requirements
+    - weaknesses (list): Areas where the candidate is lacking
+    - summary (string): A brief summary of your evaluation
+
+# Job Description Generation
+jd_generation:
+  system_prompt: |
+    You are an expert HR professional who creates clear, compelling job descriptions.
+    Create a professional job description based on the provided requirements.
+  user_prompt: |
+    Create a detailed job description with the following requirements:
+    - Job Title: {job_title}
+    - Years of Experience: {years_experience}
+    - Required Skills: {skills}
+    - Company: {company_name}
+    - Employment Type: {employment_type}
+    - Industry: {industry}
+    - Location: {location}
+    
+    Include sections for:
+    1. Job Summary
+    2. Key Responsibilities
+    3. Required Qualifications
+    4. Preferred Qualifications
+    5. Benefits (if applicable)
+
+# Interview Invitation Email
+interview_email:
+  system_prompt: |
+    You are a professional recruiter drafting an interview invitation email.
+    The email should be professional, warm, and informative.
+  user_prompt: |
+    Draft an interview invitation email with the following details:
+    - Candidate Name: {candidate_name}
+    - Position: {role}
+    - Company: {company_name}
+    
+    Include:
+    1. A warm greeting
+    2. Confirmation of their application
+    3. Interview details (date, time, format - mention that these will be confirmed)
+    4. Next steps
+    5. A professional closing
+
+# Rejection Email
+rejection_email:
+  system_prompt: |
+    You are a professional recruiter drafting a rejection email.
+    The email should be kind, professional, and leave a positive impression.
+  user_prompt: |
+    Draft a rejection email with the following details:
+    - Candidate Name: {candidate_name}
+    - Position: {role}
+    - Company: {company_name}
+    
+    The email should:
+    1. Thank the candidate for their time
+    2. Deliver the rejection news gently
+    3. Provide constructive feedback if available
+    4. Encourage them to apply for future positions
+    5. End on a positive note
